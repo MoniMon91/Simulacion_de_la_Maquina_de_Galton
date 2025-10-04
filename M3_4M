@@ -1,0 +1,96 @@
+## Simulación de una Máquina de Galton (Proyecto Fundamentos de Python)
+## Requisitos del proyecto:
+## - 3000 canicas
+## - 12 niveles de obstáculos
+## - Graficar histograma de canicas por contenedor
+## - Usar 2 funciones: (1) simulación, (2) graficación
+## - NO usar la función normal()##
+
+import random
+from typing import List
+import matplotlib.pyplot as plt
+
+
+def simular_galton(numero_canicas: int = 3000, niveles: int = 12, p_derecha: float = 0.5, seed: int | None = None) -> List[int]:
+    ##Reproduce la trayectoria de 'numero_canicas' al pasar por 'niveles' de obstáculos.
+    ##En cada nivel, la canica elige la derecha con probabilidad 'p_derecha' (y a la izquierda con 1 - p_derecha).
+    ##La posición del contenedor final coincide con los pasos a la derecha sumados por la canica (0 a niveles).
+
+    ##Parámetros:%
+        ##numero_canicas: Total de canicas a simular (3000)
+        ##niveles: cuántas filas de obstáculos hay (por requisito: 12)
+        ##p_derecha: probabilidad de que la canica se vaya a la derecha en cada choque. (Por defecto: 0.5)
+        ##seed: semilla opcional para poder repetir el mismo resultado
+
+    ##Devuelve:
+        ##Una lista con (niveles + 1) posiciones que indica cuántas canicas terminaron en cada contenedor.
+    
+    if seed is not None:
+        random.seed(seed)  # permite reproducir resultados si se desea
+
+    # Inicializa contadores para cada contenedor (0..niveles)
+    contenedores = [0] * (niveles + 1)
+
+    # Para cada canica, contamos cuántas veces fue a la derecha
+    for _ in range(numero_canicas):
+        derechos = 0
+        # Repetición de 'niveles' decisiones binarias (izq/der)
+        for _ in range(niveles):
+            # random.random() genera un float en [0, 1); comparamos con p_derecha
+            if random.random() < p_derecha:
+                derechos += 1
+            # else: implícitamente cuenta como izquierda
+
+        # El índice del contenedor es el número de pasos a la derecha
+        contenedores[derechos] += 1
+
+    return contenedores
+
+
+def graficar_histograma(contenedores: List[int], niveles: int, numero_canicas: int) -> None:
+    """
+    Hace una gráfica de barras que muestra cuántas canicas terminaron en cada contenedor.
+
+    En palabras simples:
+    - Un “contenedor” es la cajita donde cae la canica al final.
+    - Hay (niveles + 1) contenedores: se numeran de 0 hasta niveles.
+    - Cada barra de la gráfica muestra cuántas canicas cayeron en ese contenedor.
+
+    Parámetros:
+    - contenedores (lista de números): cantidad de canicas por contenedor. Su largo debe ser (niveles + 1).
+    - niveles (entero): cuántas filas de obstáculos tuvo el recorrido.
+    - numero_canicas (entero): total de canicas simuladas; se usa para el título.
+
+    Qué hace la función:
+    - Dibuja la gráfica en pantalla (no devuelve un valor).
+    
+    """
+    posiciones = list(range(niveles + 1))
+
+    plt.figure()
+    plt.bar(posiciones, contenedores)
+    plt.xlabel("Contenedor (número de pasos a la derecha)")
+    plt.ylabel("Número de canicas")
+    plt.title(f"Máquina de Galton: {numero_canicas} canicas, {niveles} niveles")
+    plt.xticks(posiciones)  # etiqueta cada contenedor
+    plt.tight_layout()
+    # Guardamos una copia del gráfico por si se requiere entregar evidencia
+    plt.savefig("galton_histograma.png", dpi=150)
+    plt.show()
+
+
+def main():
+    # Parámetros según los requisitos del proyecto
+    NUM_CANICAS = 3000
+    NIVELES = 12
+    P_DERECHA = 0.5
+
+    # 1) Simulación
+    contenedores = simular_galton(numero_canicas=NUM_CANICAS, niveles=NIVELES, p_derecha=P_DERECHA)
+
+    # 2) Graficación
+    graficar_histograma(contenedores, niveles=NIVELES, numero_canicas=NUM_CANICAS)
+
+
+if __name__ == "__main__":
+    main()
