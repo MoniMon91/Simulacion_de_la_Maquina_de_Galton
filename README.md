@@ -1,8 +1,6 @@
-# Simulacion_de_la_Maquina_de_Galton
-M3 4M Proyecto Fundamentos de Python: Simulación de la Máquina de Galton
 # Simulación de Máquina de Galton (Fundamentos de Python)
 
-Este proyecto simula una **Máquina de Galton**: cada canica atraviesa `niveles` de obstáculos; en cada nivel decide **izquierda/derecha** al azar. Al final, las canicas caen en contenedores numerados de `0` a `niveles` según **cuántas veces fueron a la derecha**.
+Este proyecto simula una **Máquina de Galton**: cada canica atraviesa niveles de obstáculos; en cada nivel decide **izquierda/derecha** al azar. 
 
 > **Objetivo del curso / rúbrica:**
 > - 3000 canicas  
@@ -10,8 +8,8 @@ Este proyecto simula una **Máquina de Galton**: cada canica atraviesa `niveles`
 > - Graficar histograma de canicas por contenedor  
 > - Usar 2 funciones (simulación y graficación)  
 > - **NO** usar `normal()`
->
-> - ## ¿Cómo funciona?
+
+## ¿Cómo funciona?
 
   1. **Simulación:**  
      Por cada canica, se repiten `niveles` decisiones. En cada decisión, la canica va **a la derecha** con probabilidad `p_derecha` (y a la izquierda con `1 - p_derecha`).  
