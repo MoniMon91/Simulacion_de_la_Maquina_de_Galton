@@ -23,9 +23,9 @@ Este proyecto simula una **Máquina de Galton**: cada canica atraviesa `niveles`
   3. **Gráfica:**  
      Se dibuja un **histograma de barras** con Matplotlib y se guarda como `galton_histograma.png`.
 
-###Funciones utilizadas:
+### Funciones utilizadas:
 
-  ####**A) Del proyecto:**
+  #### **A) Del proyecto:**
   simular_galton(numero_canicas=3000, niveles=12, p_derecha=0.5, seed=None) -> List[int]
     Simula el recorrido de las canicas y devuelve una lista con las cantidades por contenedor.
 
@@ -35,7 +35,7 @@ Este proyecto simula una **Máquina de Galton**: cada canica atraviesa `niveles`
   main() -> None
     Orquesta la ejecución: llama a simular_galton y luego a graficar_histograma.
 
-  ####**B) Funciones/llamadas de librerías usadas dentro del código (principales)**
+  #### **B) Funciones/llamadas de librerías usadas dentro del código (principales)**
 
   random.seed(seed) – fija la semilla para reproducir resultados.
 
@@ -57,7 +57,7 @@ Este proyecto simula una **Máquina de Galton**: cada canica atraviesa `niveles`
   
   plt.show() – muestra la ventana con la gráfica.
 
- ##**Consejos y notas**
+ ## **Consejos y notas**
 
   Si se cambia **p_derecha** (por ejemplo, 0.6), el histograma se desplaza hacia contenedores mayores.
   
